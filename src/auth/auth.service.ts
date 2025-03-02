@@ -6,7 +6,7 @@ import { User } from 'src/users/entities/user.entity';
 import { HashService } from './hash.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import jwtConfig from './config/jwt.config';
-import { ConfigType } from '@nestjs/config';
+import { ConfigService, ConfigType } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
         private readonly hashService: HashService,
         @Inject(jwtConfig.KEY)
         private readonly jwtConfiguration: ConfigType<typeof jwtConfig>,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
     ) {}
 
 
