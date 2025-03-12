@@ -10,4 +10,5 @@ export const jwtConstants = {
 };
 
 export const IS_PUBLIC_KEY = 'isPublic';
+export const REQUEST_TOKEN_PAYLOAD_KEY = 'tokenPayload';
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
