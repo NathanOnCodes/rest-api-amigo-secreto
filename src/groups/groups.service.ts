@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './entities/group.entity';
 import { In, Repository } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
-import { RedisService } from 'src/shared/redis/redis.service';
 
 @Injectable()
 export class GroupsService {
@@ -13,7 +12,6 @@ export class GroupsService {
     private readonly groupRepository: Repository<Group>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly redisService: RedisService,
   ){}
 
   async create(userId: number, CreateGroupDto: CreateGroupDto): Promise<Group> {
@@ -51,13 +49,6 @@ export class GroupsService {
     if (!group) throw new NotFoundException('Grupo não encontrado');
     return group;
   }
-  async getAllAssignments(groupId: string): Promise<Record<string, string>> {
-    const assignments = await this.redisService.get(`group:${groupId}:assignments`);
-    return JSON.parse(assignments);
-  }
 
-  async getMyAssignment(groupId: string, useerId: string): Promise<string>{
-    const assignments = await this.getAllAssignments(groupId);
-    return assignments[useerId];
-  }
+
 }
