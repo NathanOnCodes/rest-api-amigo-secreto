@@ -1,6 +1,5 @@
 import { Group } from "src/groups/entities/group.entity";
-import { Wishlist } from "src/wishlist/entities/wishlist.entity";
-import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -21,7 +20,4 @@ export class User {
 
     @ManyToMany(() => Group, (group) => group.participants)
     participatingGroups: Group[];
-
-    @OneToOne(() => Wishlist, (wishlist) => wishlist.user)
-    wishlist: Wishlist;
 }
